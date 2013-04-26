@@ -1,0 +1,9 @@
+extends layout
+
+block title
+  | My dashboard title
+
+div.gridster
+  ul
+    li(data-row='1', data-col='1', data-sizex='1', data-sizey='1')
+    div(data-id='my_widget', data-view='Text')

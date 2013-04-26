@@ -1,0 +1,43 @@
+{
+  "name": "dashing-js",
+  "description": "Port of Dashing to node.js",
+  "author": "Fabio Caseri <fabio.caseri@gmail.com> (http://www.fabiocaseri.com)",
+  "version": "0.0.1",
+  "license": "MIT",
+  "dependencies": {
+    "async": "~0.2.7",
+    "coffee-script": "~1.6.2",
+    "commander": "~1.1.1",
+    "consolidate": "~0.9.0",
+    "ejs": "~0.8.3",
+    "express": "~3.2.0",
+    "express-ejs-layouts": "~0.3.1",
+    "fs-extra": "~0.6.0",
+    "jade": "~0.29.0",
+    "mincer": "~0.4.5",
+    "node-sass": "~0.4.3",
+    "node-schedule": "~0.1.8",
+    "request": "~2.20.0",
+    "walker": "~1.0.3"
+  },
+  "devDependencies": {
+    "ejs": "*",
+    "jade": "*",
+    "mocha": "*",
+    "should": "*"
+  },
+  "keywords": [
+    "dashing",
+    "dashboard",
+    "web"
+  ],
+  "repository": "git://github.com/fabiocaseri/dashing-js",
+  "main": "index",
+  "bin": {
+    "dashing-js": "./bin/dashing-js"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "engine": "node >= 0.8"
+}

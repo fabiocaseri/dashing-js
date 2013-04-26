@@ -1,0 +1,11 @@
+{
+  "name": "<%= name %>",
+  "description": "<%= name %>",
+  "author": "<Put your name here>",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "dashing-js": "~<%= dashing.version %>"
+  },
+  "engine": "node >= 0.8"
+}

@@ -1,0 +1,30 @@
+!!! 5
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(name="description", content='')
+    meta(name="viewport", content='width=device-width')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+    title
+      block title
+        | dashing-js
+
+    // The javascript and css are managed by sprockets. The files can be found in the /assets folder
+    script(src='/assets/application.js')
+    link(rel='stylesheet', href='/assets/application.css')
+
+    link(rel='stylesheet', href='//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700', type='text/css')
+    link(rel='icon', href='/assets/favicon.ico')
+  body
+    div#container
+      block content
+
+    block footer
+      if settings.development
+        div#saving-instructions
+          p
+            i Paste the following at the bottom of #{dashboard}.jade
+          textarea#gridster-code
+        a#save-gridster(href='#saving-instructions') Save this layout
+
+    block scripts

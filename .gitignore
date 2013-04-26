@@ -1,0 +1,7 @@
+.DS_STORE
+*.log
+*.out
+*.pid
+*.swp
+*.swo
+node_modules/

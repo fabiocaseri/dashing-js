@@ -1,0 +1,168 @@
+#!/usr/bin/env node
+
+var fs = require('fs')
+  , path = require('path')
+  , spawn = require('child_process').spawn
+  , pkg = require('../package.json')
+  , Thor = require('../lib/thor').Thor
+  , utils = require('../lib/utils')
+  , program = require('commander')
+  , request = require('request');
+
+program.version(pkg.version);
+
+auth_token = null;
+send_event = function(id, data) {
+  if (auth_token) {
+    data.auth_token = auth_token;
+  }
+  request({
+      url: 'http://localhost:3030/widgets/' + id,
+      method: 'POST',
+      json: data
+    }, function(err, res, body) {
+      if (!err && res.statusCode == 204) {
+        console.log('Data Sent to ' + id + ': ' + JSON.stringify(data));
+      } else {
+        console.error('Error sending data');
+        console.error(err);
+      }
+  });
+};
+
+var generators = (function(types) {
+  var rtn = {};
+  for (var i = 0, len = types.length; i < len; i++) {
+    rtn[types[i]] = (function(type) {
+      return function(name) {
+        Thor.directory(type, type + 's', {name: Thor.Util.dash_case(name)});
+      }
+    })(types[i]);
+  }
+  return rtn;
+})(['widget', 'dashboard', 'job']);
+
+program.command('new <project_name>')
+  .description('Sets up ALL THE THINGS needed for your dashboard project.')
+  .option('-f, --force', 'force on non-empty directory')
+  .action(function(project_name, options) {
+    project_name = Thor.Util.dash_case(project_name);
+    utils.emptyDirectory(project_name, function(empty) {
+      if (empty || options.force) {
+        createProject(project_name);
+      } else {
+      	program.confirm('destination is not empty, continue? ', function(ok) {
+      	  if (ok) {
+      	  	process.stdin.destroy();
+            createProject(project_name);
+      	  } else {
+      	  	utils.abort('aborting');
+      	  }
+      	});
+      }
+    });
+  });
+
+program.command('generate <type> <name>')
+  .description('Creates a new widget, dashboard, or job.')
+  .action(function(type, name) {
+    if (typeof(generators[type]) === 'function') {
+      console.log('Generating %s "%s"', type, name);
+      generators[type](name);
+    } else {
+      console.error('Invalid generator. Either use widget, dashboard, or job');
+    }
+  });
+
+program.command('install <gist_id>')
+  .description('Installs a new widget from a gist.')
+  .option('-p, --proxy <proxy>', 'Use proxy')
+  .action(function(gist_id, options) {
+    console.log('Installing gist "%s"', gist_id);
+    var public_url = "https://gist.github.com/" + gist_id;
+    if (options.proxy) {
+      console.log('Using proxy "%s"', options.proxy);
+      request = request.defaults({proxy: options.proxy});
+    }
+    request({
+      url: 'https://api.github.com/gists/' + gist_id,
+      headers: {'User-Agent': pkg.name + '-' + pkg.version}
+    }, function(err, res, body) {
+      if (!err && res.statusCode == 200) {
+        var gist = JSON.parse(body);
+        var widget_name;
+        for (var k in gist.files) {
+          var m = gist.files[k].filename.match(/(\w*)\.(coffee|html|scss)$/);
+          if (m) {
+            widget_name = m[1];
+            break;
+          }
+        }
+        utils.mkdir('widgets/' + widget_name, function() {
+          for (var k in gist.files) {
+            var filename = gist.files[k].filename;
+            var outFile = filename;
+            if (filename.match(/(\w*)\.js$/)) {
+              utils.write('jobs/' + filename, gist.files[k].content);
+            } else if(filename.match(/(\w*)\.(coffee|html|scss)$/)) {
+              utils.write('widgets/' + widget_name + '/' + filename, gist.files[k].content);
+            }
+          }
+          console.log('if needed. More information for this widget can be found at ' + public_url);
+        });
+      } else {
+        console.error('Could not find gist at ' + public_url);
+        res && console.error('[' + res.statusCode + '] ' + body);
+        err && console.error(err);
+      }
+    });
+  });
+
+program.command('start')
+  .description('Starts the server in style!')
+  .option('-p, --port <port>', 'Listen port', 3030)
+  .option('-j, --job_path <path>', 'Specify the directory where jobs are stored')
+  .option('-e, --view_engine <engine>', 'Specify the view engine to use (defaults to jade)')
+  .action(function(options) {
+    var env = process.env || {};
+    env.PORT = options.port;
+    if (options['job_path']) {
+      env.JOB_PATH = options['job_path'];
+    }
+    if (options['view_engine']) {
+      env.VIEW_ENGINE = options['view_engine'];
+    }
+    var child = spawn('node', ['server.js'], {
+      cwd: process.cwd(),
+      env: env,
+      stdio: 'inherit'
+    });
+    child.on('close', function(code) {
+      console.log('child process exited with code ' + code);
+    });
+  });
+
+program.command('job <job_name>')
+  .description('Runs the specified job. Make sure to supply your auth token if you have one set.')
+  .option('-a, --auth_token <token>', 'The auth_token to use')
+  .action(function(job_name, options) {
+    // Load custom libraries
+    fs.readdir([process.cwd(), 'lib'].join(path.sep), function(err, files) {
+      if (err) throw err;
+      for (var i in files) {
+        var file = [process.cwd(), 'lib', files[i]].join(path.sep);
+        require(file);
+      }
+    });
+    if (options['auth_token']) {
+      auth_token = options['auth_token'];
+    }
+    require([process.cwd(), 'jobs', job_name + '.js'].join(path.sep));
+  });
+
+program.parse(process.argv);
+
+function createProject(name) {
+  console.log('Creating "%s"', name);
+  Thor.directory('project', name, {name: name, dashing: {version: pkg.version}});
+}

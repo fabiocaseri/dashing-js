@@ -1,0 +1,8 @@
+.git*
+.DS_STORE
+*.log
+*.out
+*.pid
+*.swp
+*.swo
+test/
