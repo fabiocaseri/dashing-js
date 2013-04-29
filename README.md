@@ -1,32 +1,40 @@
 # dashing-js
 
-Port of (Dashing)[http://shopify.github.io/dashing/] to node.js
+Port of [Dashing](http://shopify.github.io/dashing/) to node.js
 
 ## Getting Started
 
 1. Install from npm
+
 ```shell
 $ npm install -g dashing-js
 ```
+
 2. Generate a new project
+
 ```shell
 $ dashing-js new sweet_dashboard_project
 ```
+
 3. Change your directory to sweet_dashboard_project and install required modules
+
 ```shell
 $ cd sweet_dashboard_project && npm install
 ```
+
 4. Start the server!
+
 ```shell
 $ dashing-js start
 ```
+
 5. Point your browser at http://localhost:3030/ and have fun!
 
 ***
 
 Every new Dashing project comes with sample widgets & sample dashboards for you to explore. The directory is setup as follows:
 
-* Assets — All your images, fonts, and js/coffeescript libraries. Uses (Mincer)[http://nodeca.github.io/mincer/]
+* Assets — All your images, fonts, and js/coffeescript libraries. Uses [Mincer](http://nodeca.github.io/mincer/)
 * Dashboards — One .jade file for each dashboard that contains the layout for the widgets.
 * Jobs — Your js jobs for fetching data (e.g for calling third party APIs like twitter).
 * Lib — Optional js files to help out your jobs.
