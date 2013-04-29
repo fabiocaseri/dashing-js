@@ -7,7 +7,8 @@ var fs = require('fs')
   , Thor = require('../lib/thor').Thor
   , utils = require('../lib/utils')
   , program = require('commander')
-  , request = require('request');
+  , request = require('request')
+  , unzip = require('unzip');
 
 program.version(pkg.version);
 
@@ -74,48 +75,82 @@ program.command('generate <type> <name>')
     }
   });
 
-program.command('install <gist_id>')
-  .description('Installs a new widget from a gist.')
+program.command('install <id>')
+  .description('Installs a new widget from a gist or a zipball.')
   .option('-p, --proxy <proxy>', 'Use proxy')
-  .action(function(gist_id, options) {
-    console.log('Installing gist "%s"', gist_id);
-    var public_url = "https://gist.github.com/" + gist_id;
+  .action(function(id, options) {
     if (options.proxy) {
       console.log('Using proxy "%s"', options.proxy);
       request = request.defaults({proxy: options.proxy});
     }
-    request({
-      url: 'https://api.github.com/gists/' + gist_id,
-      headers: {'User-Agent': pkg.name + '-' + pkg.version}
-    }, function(err, res, body) {
-      if (!err && res.statusCode == 200) {
-        var gist = JSON.parse(body);
-        var widget_name;
-        for (var k in gist.files) {
-          var m = gist.files[k].filename.match(/(\w*)\.(coffee|html|scss)$/);
-          if (m) {
-            widget_name = m[1];
-            break;
+    if (isNaN(parseInt(id, 10))) {
+      console.log('Installing zip "%s"', id);
+      var origDirName, widgetName;
+      request({
+        url: id,
+        headers: {'User-Agent': pkg.name + '-' + pkg.version}
+      }).pipe(unzip.Parse())
+      .on('entry', function(entry) {
+        if (entry.type === 'Directory' && !origDirName) {
+          origDirName = entry.path;
+          utils.mkdir.sync('widgets/' + origDirName);
+          entry.autodrain();
+        } else if (entry.type === 'File') {
+          var m = entry.path.match(/(\w*)\.(coffee|html|scss)$/);
+          var mj = entry.path.match(/(\w*)\.js$/);
+          if (mj) {
+            console.log('      \x1b[36mcreate\x1b[0m  jobs/' + mj[0]);
+            entry.pipe(fs.createWriteStream('jobs/' + mj[0]));
+          } else {
+            widgetName = m ? m[1] : widgetName;
+            console.log('      \x1b[36mcreate\x1b[0m  widgets/' + entry.path);
+            entry.pipe(fs.createWriteStream('widgets/' + entry.path));
           }
         }
-        utils.mkdir('widgets/' + widget_name, function() {
+      })
+      .on('error', function(err) {
+        console.error('Error reading zip file from: ' + id);
+        err && console.error(err);
+      })
+      .on('close', function() {
+        utils.mv.sync('widgets/' + origDirName, 'widgets/' + widgetName);
+      });
+    } else {
+      console.log('Installing gist "%s"', id);
+      var public_url = "https://gist.github.com/" + id;
+      request({
+        url: 'https://api.github.com/gists/' + id,
+        headers: {'User-Agent': pkg.name + '-' + pkg.version}
+      }, function(err, res, body) {
+        if (!err && res.statusCode == 200) {
+          var gist = JSON.parse(body);
+          var widgetName;
           for (var k in gist.files) {
-            var filename = gist.files[k].filename;
-            var outFile = filename;
-            if (filename.match(/(\w*)\.js$/)) {
-              utils.write('jobs/' + filename, gist.files[k].content);
-            } else if(filename.match(/(\w*)\.(coffee|html|scss)$/)) {
-              utils.write('widgets/' + widget_name + '/' + filename, gist.files[k].content);
+            var m = gist.files[k].filename.match(/(\w*)\.(coffee|html|scss)$/);
+            if (m) {
+              widgetName = m[1];
+              break;
             }
           }
-          console.log('if needed. More information for this widget can be found at ' + public_url);
-        });
-      } else {
-        console.error('Could not find gist at ' + public_url);
-        res && console.error('[' + res.statusCode + '] ' + body);
-        err && console.error(err);
-      }
-    });
+          utils.mkdir('widgets/' + widgetName, function() {
+            for (var k in gist.files) {
+              var filename = gist.files[k].filename;
+              var outFile = filename;
+              if (filename.match(/(\w*)\.js$/)) {
+                utils.write('jobs/' + filename, gist.files[k].content);
+              } else/* if(filename.match(/(\w*)\.(coffee|html|scss)$/))*/ {
+                utils.write('widgets/' + widgetName + '/' + filename, gist.files[k].content);
+              }
+            }
+            console.log('if needed. More information for this widget can be found at ' + public_url);
+          });
+        } else {
+          console.error('Could not find gist at ' + public_url);
+          res && console.error('[' + res.statusCode + '] ' + body);
+          err && console.error(err);
+        }
+      });
+    }
   });
 
 program.command('start')
