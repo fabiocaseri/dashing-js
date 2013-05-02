@@ -158,6 +158,7 @@ program.command('start')
   .option('-p, --port <port>', 'Listen port', 3030)
   .option('-j, --job_path <path>', 'Specify the directory where jobs are stored')
   .option('-e, --view_engine <engine>', 'Specify the view engine to use (defaults to jade)')
+  .option('-d, --daemon', 'Daemonize the server')
   .action(function(options) {
     var env = process.env || {};
     env.PORT = options.port;
@@ -167,11 +168,19 @@ program.command('start')
     if (options['view_engine']) {
       env.VIEW_ENGINE = options['view_engine'];
     }
-    var child = spawn('node', ['server.js'], {
+    env.__daemon = !!options['daemon'];
+    var logFile = options['daemon'] ? fs.openSync('./out.log', 'a') : null;
+    var stdio = options['daemon'] ? ['ignore', logFile] : 'inherit';
+    var child = spawn(process.execPath, ['server.js'], {
       cwd: process.cwd(),
       env: env,
-      stdio: 'inherit'
+      stdio: stdio,
+      detached: env.__daemon
     });
+    if (options['daemon']) {
+      child.unref();
+      process.exit(0);
+    }
     child.on('close', function(code) {
       console.log('child process exited with code ' + code);
     });
