@@ -14,7 +14,7 @@ $moreinfo-color:    rgba(255, 255, 255, 0.7);
 .widget-list {
 
   background-color: $background-color;
-  vertical-align: top;
+  vertical-align: top !important;
 
   .title {
     color: $title-color;
