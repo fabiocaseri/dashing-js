@@ -169,14 +169,16 @@ program.command('start')
       env.VIEW_ENGINE = options['view_engine'];
     }
     env.__daemon = !!options['daemon'];
-    var logFile = options['daemon'] ? fs.openSync('./out.log', 'a') : null;
-    var stdio = options['daemon'] ? ['ignore', logFile] : 'inherit';
-    var child = spawn(process.execPath, ['server.js'], {
+    var spawn_opts = {
       cwd: process.cwd(),
       env: env,
-      stdio: stdio,
-      detached: env.__daemon
-    });
+      stdio: 'inherit',
+    };
+    if (options['daemon']) {
+      spawn_opts.stdio = ['ignore', fs.openSync('./out.log', 'a')];
+      spawn_opts.detached = true;
+    }
+    var child = spawn(process.execPath, ['server.js'], spawn_opts);
     if (options['daemon']) {
       child.unref();
       process.exit(0);
