@@ -16,8 +16,6 @@ $background-danger-color-1: #eeae32;
 $background-danger-color-2: #ff9618;
 $text-danger-color: #fff;
 
-// Commented waiting for libsass issue #54 (https://github.com/hcatlin/libsass/issues/54)
-/*
 @-webkit-keyframes status-warning-background {
   0%   { background-color: $background-warning-color-1; }
   50%  { background-color: $background-warning-color-2; }
@@ -28,7 +26,6 @@ $text-danger-color: #fff;
   50%  { background-color: $background-danger-color-2; }
   100% { background-color: $background-danger-color-1; }
 }
-*/
 @mixin animation($animation-name, $duration, $function, $animation-iteration-count:""){
   -webkit-animation:  $animation-name $duration $function #{$animation-iteration-count};
   -moz-animation:     $animation-name $duration $function #{$animation-iteration-count};
