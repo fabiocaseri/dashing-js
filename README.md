@@ -34,9 +34,9 @@ $ dashing-js start
 
 Every new Dashing project comes with sample widgets & sample dashboards for you to explore. The directory is setup as follows:
 
-* Assets — All your images, fonts, and js/coffeescript libraries. Uses [Mincer](http://nodeca.github.io/mincer/)
+* Assets — All your images, fonts, and js/coffeescript libraries. Uses <del>[Sprockets](https://github.com/sstephenson/sprockets)</del> [Mincer](http://nodeca.github.io/mincer/).
 * Dashboards — One .jade file for each dashboard that contains the layout for the widgets.
-* Jobs — Your js/coffee jobs for fetching data (e.g for calling third party APIs like twitter). Name them *.job.js/*.job.coffee
+* Jobs — Your js/coffee jobs for fetching data (e.g for calling third party APIs like twitter). Name them *\*.job.js/\*.job.coffee*
 * Lib — Optional js/coffee files to help out your jobs.
 * Public — Static files that you want to serve. A good place for a favicon or a custom 404 page.
 * Widgets — All the html/css/coffee for individual widgets.
