@@ -127,7 +127,7 @@ program.command('install <id>')
           var widgetName;
           for (var k in gist.files) {
             var m = gist.files[k].filename.match(/(\w*)\.(coffee|html|scss)$/);
-            if (m) {
+            if (m && !gist.files[k].filename.match(/(\w*)\.job\.coffee$/)) {
               widgetName = m[1];
               break;
             }
@@ -136,7 +136,7 @@ program.command('install <id>')
             for (var k in gist.files) {
               var filename = gist.files[k].filename;
               var outFile = filename;
-              if (filename.match(/(\w*)\.js$/)) {
+              if (filename.match(/(\w*)\.job\.js$/) || filename.match(/(\w*)\.job\.coffee$/)) {
                 utils.write('jobs/' + filename, gist.files[k].content);
               } else/* if(filename.match(/(\w*)\.(coffee|html|scss)$/))*/ {
                 utils.write('widgets/' + widgetName + '/' + filename, gist.files[k].content);
@@ -203,7 +203,7 @@ program.command('job <job_name>')
     if (options['auth_token']) {
       auth_token = options['auth_token'];
     }
-    require([process.cwd(), 'jobs', job_name + '.js'].join(path.sep));
+    require([process.cwd(), 'jobs', job_name + '.job.js'].join(path.sep));
   });
 
 program.parse(process.argv);
