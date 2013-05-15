@@ -36,8 +36,8 @@ Every new Dashing project comes with sample widgets & sample dashboards for you 
 
 * Assets — All your images, fonts, and js/coffeescript libraries. Uses [Mincer](http://nodeca.github.io/mincer/)
 * Dashboards — One .jade file for each dashboard that contains the layout for the widgets.
-* Jobs — Your js jobs for fetching data (e.g for calling third party APIs like twitter).
-* Lib — Optional js files to help out your jobs.
+* Jobs — Your js/coffee jobs for fetching data (e.g for calling third party APIs like twitter). Name them *.job.js/*.job.coffee
+* Lib — Optional js/coffee files to help out your jobs.
 * Public — Static files that you want to serve. A good place for a favicon or a custom 404 page.
 * Widgets — All the html/css/coffee for individual widgets.
 
