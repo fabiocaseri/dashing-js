@@ -203,7 +203,18 @@ program.command('job <job_name>')
     if (options['auth_token']) {
       auth_token = options['auth_token'];
     }
-    require([process.cwd(), 'jobs', job_name + '.job.js'].join(path.sep));
+    var exts = ['js', 'coffee'];
+    var err = true;
+    for (var i in exts) {
+      var filePath = [process.cwd(), 'jobs', job_name + '.job.' + exts[i]].join(path.sep);
+      if (fs.existsSync(filePath)) {
+        console.log('Loading job file:', filePath);
+        require(filePath);
+        err = false;
+        break;
+      }
+    }
+    if (err) console.error('No job file found for "' + job_name + '". Supported job file types:', exts);
   });
 
 program.parse(process.argv);
