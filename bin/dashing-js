@@ -175,7 +175,8 @@ program.command('start')
       stdio: 'inherit',
     };
     if (options['daemon']) {
-      spawn_opts.stdio = ['ignore', fs.openSync('./out.log', 'a')];
+      var outFile = fs.openSync('./out.log', 'a');
+      spawn_opts.stdio = ['ignore', outFile, outFile];
       spawn_opts.detached = true;
     }
     var child = spawn(process.execPath, ['server.js'], spawn_opts);
