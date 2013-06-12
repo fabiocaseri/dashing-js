@@ -1,7 +1,12 @@
-module.exports = require('./lib/dashing');
+var dashing = require('./lib/dashing');
 
-// Exports utility modules
-module.exports['async'] = require('async');
-module.exports['fs-extra'] = require('fs-extra');
-module.exports['request'] = require('request');
-module.exports['walker'] = require('walker');
+module.exports = {
+  Dashing: dashing.Dashing,
+  logger: dashing.logger,
+
+  // Exports utility modules
+  async: require('async'),
+  'fs-extra': require('fs-extra'),
+  request: require('request'),
+  walker: require('walker')
+};
