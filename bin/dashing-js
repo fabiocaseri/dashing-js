@@ -193,6 +193,7 @@ program.command('job <job_name>')
   .description('Runs the specified job. Make sure to supply your auth token if you have one set.')
   .option('-a, --auth_token <token>', 'The auth_token to use')
   .action(function(job_name, options) {
+    require('coffee-script');
     // Load custom libraries
     fs.readdir([process.cwd(), 'lib'].join(path.sep), function(err, files) {
       if (err) throw err;
