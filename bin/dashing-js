@@ -176,7 +176,8 @@ program.command('start')
     };
     if (options['daemon']) {
       var outFile = fs.openSync('./out.log', 'a');
-      spawn_opts.stdio = ['ignore', outFile, outFile];
+      var errFile = fs.openSync('./out.log', 'a');
+      spawn_opts.stdio = ['ignore', outFile, errFile];
       spawn_opts.detached = true;
     }
     var child = spawn(process.execPath, ['server.js'], spawn_opts);
