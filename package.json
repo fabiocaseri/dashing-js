@@ -15,7 +15,7 @@
     "fs-extra": "~0.6.0",
     "jade": "~0.29.0",
     "mincer": "~0.4.5",
-    "node-sass": "~0.5.0",
+    "node-sass": "~0.5.2",
     "node-schedule": "~0.1.8",
     "request": "~2.20.0",
     "unzip": "~0.1.7",
