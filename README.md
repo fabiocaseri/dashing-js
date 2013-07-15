@@ -2,6 +2,9 @@
 
 Port of [Dashing](http://shopify.github.io/dashing/) to node.js
 
+[![NPM version](https://badge.fury.io/js/dashing-js.png)](http://badge.fury.io/js/dashing-js)
+[![Dependency Status](https://david-dm.org/fabiocaseri/dashing-js.png)](https://david-dm.org/fabiocaseri/dashing-js)
+
 ## Getting Started
 
 1. Install from npm
