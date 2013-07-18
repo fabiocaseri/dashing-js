@@ -19,6 +19,8 @@ describe('Mincer', function() {
     done();
   });
 
+  /* Mincer 0.4.x */
+  /*
   it('should compile "application.js" without errors', function(done) {
     mincer.environment.findAsset('application.js').compile(function(err, asset) {
       done();
@@ -31,9 +33,9 @@ describe('Mincer', function() {
       done();
     });
   });
+  */
 
   /* Mincer 0.5.x */
-  /*
   it('should compile "application.js" without errors', function(done) {
     if (mincer.environment.findAsset('application.js')) {
       done();
@@ -46,6 +48,5 @@ describe('Mincer', function() {
       done();
     }
   });
-  */
 
 });
