@@ -4,7 +4,7 @@ var dashing = require('dashing-js').Dashing();
 //dashing.auth_token = 'YOUR_AUTH_TOKEN';
 
 /*
-dashing._protected = function(req, res, next) {
+dashing.protected = function(req, res, next) {
   // Put any authentication code you want in here.
   // This method is run before accessing any resource.
   // if (true) next();
