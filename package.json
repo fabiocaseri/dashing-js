@@ -41,5 +41,5 @@
   "scripts": {
     "test": "make test"
   },
-  "engine": "node >= 0.8"
+  "engine": "node >= 0.10"
 }
