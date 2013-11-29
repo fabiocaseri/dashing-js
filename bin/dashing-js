@@ -7,6 +7,7 @@ var fs = require('fs')
   , Thor = require('../lib/thor').Thor
   , utils = require('../lib/utils')
   , program = require('commander')
+  , prompt = require('prompt')
   , request = require('request')
   , unzip = require('unzip');
 
@@ -52,8 +53,15 @@ program.command('new <project_name>')
       if (empty || options.force) {
         createProject(project_name);
       } else {
-      	program.confirm('destination is not empty, continue? ', function(ok) {
-      	  if (ok) {
+        prompt.start();
+        prompt.get({
+          name: 'yesno',
+          message: 'destination is not empty, continue?',
+          validator: /y[es]*|n[o]?/i,
+          warning: 'Must respond yes or no',
+          default: 'no'
+        }, function(err, result) {
+      	  if (/^y/i.test(result.yesno)) {
       	  	process.stdin.destroy();
             createProject(project_name);
       	  } else {
