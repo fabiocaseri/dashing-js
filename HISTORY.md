@@ -1,3 +1,10 @@
+0.1.1 / 2013.12.03
+-------------------
+
+* Fix number widgets in sample dashboard
+* Use right arrow icon if difference is zero in number widget. Fixes #11
+
+
 0.1.0 / 2013.12.03
 -------------------
 
