@@ -1,12 +1,18 @@
-0.0.11 / 2013.07.xx
+0.1.0 / 2013.12.03
 -------------------
 
 * Updated libraries versions
-  - commander (~1.1.1 -> ~1.3.0)
-  - express (~3.2.0 -> ~3.3.4)
-  - jade (~0.29.0 -> ~0.33.0)
-  - request (~2.20.0 -> ~2.22.0)
+  - commander (~1.1.1 -> ~2.1.0)
+  - consolidate (~0.9.0 -> ~0.10.0)
+  - express (~3.2.0 -> ~3.4.6)
+  - fs-extra (~0.6.0 -> ~0.8.1)
+  - jade (~0.29.0 -> ~0.35.0)
+  - mincer (~0.4.5 -> ~0.5.12)
+  - node-sass (0.5.2 -> ~0.7.0)
+  - request (~2.20.0 -> ~2.27.0)
 * Jade version 0.31.0 deprecated implicit text only support for scripts and styles.
+* Added library prompt (commander removed confirm & prompt methods)
+* Explicit flush response for SSE (connect 2.10.0)
 
 
 0.0.10 / 2013.07.10
