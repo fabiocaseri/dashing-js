@@ -1,3 +1,14 @@
+0.1.2 / 2013.12.04
+-------------------
+
+* Handle widgets with multiple capital letters (original [PR #181](https://github.com/Shopify/dashing/pull/181))
+* Use right arrow icon if difference is zero in number widget. Fixes #11
+* Upgrade FontAwesome to version 4.0.3 and update new icon names ([Changes](https://github.com/FortAwesome/Font-Awesome/wiki/Upgrading-from-3.2.1-to-4))
+* Use relative url for EventSource to allow running on sub-path (original [PR #209](https://github.com/Shopify/dashing/pull/209))
+* Strip html by default in widgets. Users can disable this with the 'raw' filter. (orig [9f93895bd4](https://github.com/Shopify/dashing/commit/9f93895bd40aad02e88f7ed7bfd954c930aa27db))
+* Update d3 (v3.3.11) and rickshaw (v1.4.5)
+
+
 0.1.1 / 2013.12.03
 -------------------
 
@@ -81,7 +92,7 @@
 
 * Added ability to install widgets from zipballs
 * Added ability to add custom stylesheets
-* Merge original PL #115 (Added suffix option for number widget)
+* Merge original [PR #115](https://github.com/Shopify/dashing/pull/115) (Added suffix option for number widget)
 
 
 0.0.1 / 2013.04.26
