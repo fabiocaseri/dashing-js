@@ -1,3 +1,12 @@
+0.1.3 / 2013.12.09
+-------------------
+
+* Updated libraries versions
+  - request (~2.27.0 -> ~2.29.0)
+* Use different tags when scaffolding with ejs. Fixes #12
+* Include custom stylesheets in ejs layout only if defined
+
+
 0.1.2 / 2013.12.04
 -------------------
 
