@@ -1,3 +1,9 @@
+0.1.4 / 2013.12.12
+-------------------
+
+* Fixed indentation in jade template to properly show up default widget. Thanks to @arabold [PR #13]
+
+
 0.1.3 / 2013.12.09
 -------------------
 
