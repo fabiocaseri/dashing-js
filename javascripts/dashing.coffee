@@ -1,5 +1,6 @@
 #= require jquery
 #= require es5-shim
+#= require eventsource
 #= require batman
 #= require batman.jquery
 
@@ -31,7 +32,7 @@ Dashing.params = Batman.URI.paramsFromQuery(window.location.search.slice(1));
 class Dashing.Widget extends Batman.View
   constructor:  ->
     # Set the view path
-    @constructor::source = Batman.Filters.underscore(@constructor.name)
+    @constructor::source = Batman.Filters.underscore(@constructor.getName())
     super
 
     @mixin($(@node).data())
@@ -41,6 +42,10 @@ class Dashing.Widget extends Batman.View
 
     type = Batman.Filters.dashize(@view)
     $(@node).addClass("widget widget-#{type} #{@id}")
+
+  @getName: ->
+    # We would prefer using @constructor.name here but it's nonstandard and doesn't work on IE
+    this.toString().match(/^function\s(.+)\(/)[1]
 
   @accessor 'updatedAtMessage', ->
     if updatedAt = @get('updatedAt')
