@@ -4,6 +4,7 @@ Port of [Dashing](http://shopify.github.io/dashing/) to node.js
 
 [![NPM version](https://badge.fury.io/js/dashing-js.png)](http://badge.fury.io/js/dashing-js)
 [![Dependency Status](https://david-dm.org/fabiocaseri/dashing-js.png)](https://david-dm.org/fabiocaseri/dashing-js)
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fabiocaseri/dashing-js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ## Getting Started
 
@@ -52,7 +53,4 @@ dashing-js is setup to be easily deployed on a Joyent Node SmartMachine. This me
 1. The version of Node is defined in package.json
 2. The main script to run is server.js
 3. The web server port is pulled from process.env.PORT
-
-
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fabiocaseri/dashing-js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
