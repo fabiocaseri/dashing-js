@@ -1,3 +1,11 @@
+0.1.5 / 2013.12.27
+-------------------
+
+* Updated libraries versions
+  - request (~2.29.0 -> ~2.30.0)
+* Added IE9+ compatibility. Thanks to @arabold [PR #15]
+
+
 0.1.4 / 2013.12.12
 -------------------
 
