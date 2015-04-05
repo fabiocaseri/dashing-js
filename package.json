@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "async": "~0.2.7",
+    "bluebird": "^2.9.24",
     "coffee-script": "~1.6.2",
     "commander": "~2.1.0",
     "consolidate": "~0.10.0",
@@ -16,7 +17,6 @@
     "jade": "~0.35.0",
     "mincer": "~0.5.12",
     "node-sass": "~0.7.0",
-    "node-schedule": "~0.1.8",
     "prompt": "~0.2.11",
     "request": "~2.30.0",
     "unzip": "~0.1.7",
