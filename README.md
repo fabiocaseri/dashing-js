@@ -2,8 +2,8 @@
 
 A fork of the port of [Dashing](http://shopify.github.io/dashing/) to node.js in attempt to revive the project with updated dependencies.
 
+[![NPM version](https://badge.fury.io/js/nuvo-dashing-js.png)](http://badge.fury.io/js/nuvo-dashing-js)
 [![Dependency Status](https://david-dm.org/lokulin/nuvo-dashing-js.png)](https://david-dm.org/lokulin/nuvo-dashing-js)
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fabiocaseri/dashing-js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ## Getting Started
 
