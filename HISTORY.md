@@ -1,3 +1,18 @@
+0.1.8 / 2015.05.02
+------------------
+
+* Close event socket after each message
+* fixing: throwing error while loading file
+* feat: import matching settings json file data into dashboard if it exists
+* Re-pull changes from dashing
+
+
+0.1.7 / 2015.05.02
+------------------
+
+* Fixed broken version 0.1.6
+
+
 0.1.6 / 2015.05.02
 ------------------
 

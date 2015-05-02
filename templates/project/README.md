@@ -1,1 +1,1 @@
-Check out http://fabiocaseri.github.io/dashing-js for more information.
+Check out https://github.com/lokulin/nuvo-dashing-js for more information.

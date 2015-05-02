@@ -2,7 +2,7 @@
   "name": "nuvo-dashing-js",
   "description": "A fork of dashing-js to bring dependencies up to date.",
   "author": "Fabio Caseri <fabio.caseri@gmail.com> (http://www.fabiocaseri.com)",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "license": "MIT",
   "dependencies": {
     "async": "~0.9.0",
