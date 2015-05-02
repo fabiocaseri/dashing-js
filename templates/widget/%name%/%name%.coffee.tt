@@ -1,4 +1,4 @@
-class Dashing.{{= Thor.Util.camel_case(name) }} extends Dashing.Widget
+class Dashing.<%= Thor::Util.camel_case(name) %> extends Dashing.Widget
 
   ready: ->
     # This is fired when the widget is done being rendered
