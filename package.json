@@ -1,6 +1,6 @@
 {
-  "name": "dashing-js",
-  "description": "Port of Dashing to node.js",
+  "name": "nuvo-dashing-js",
+  "description": "A fork of dashing-js to bring dependencies up to date.",
   "author": "Fabio Caseri <fabio.caseri@gmail.com> (http://www.fabiocaseri.com)",
   "version": "0.1.6",
   "license": "MIT",
@@ -34,7 +34,7 @@
     "dashboard",
     "web"
   ],
-  "repository": "git://github.com/fabiocaseri/dashing-js",
+  "repository": "git://github.com/lokulin/nuvo-dashing-js",
   "main": "index",
   "bin": {
     "dashing-js": "./bin/dashing-js"
