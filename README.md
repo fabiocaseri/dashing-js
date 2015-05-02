@@ -3,7 +3,7 @@
 Port of [Dashing](http://shopify.github.io/dashing/) to node.js
 
 [![NPM version](https://badge.fury.io/js/dashing-js.png)](http://badge.fury.io/js/dashing-js)
-[![Dependency Status](https://david-dm.org/fabiocaseri/dashing-js.png)](https://david-dm.org/fabiocaseri/dashing-js)
+[![Dependency Status](https://david-dm.org/lokulin/dashing-js.png)](https://david-dm.org/fabiocaseri/dashing-js)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/fabiocaseri/dashing-js/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
 ## Getting Started
