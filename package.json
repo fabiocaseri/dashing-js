@@ -9,6 +9,7 @@
     "coffee-script": "~1.9.2",
     "commander": "~2.8.1",
     "consolidate": "~0.12.1",
+    "bluebird": "^2.9.24",
     "ejs": "~0.8.3",
     "express": "~4.12.3",
     "express-ejs-layouts": "~1.1.0",
