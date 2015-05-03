@@ -1,3 +1,10 @@
+0.1.9 / 2015.05.03
+------------------
+
+* Fix damage from dashing merge
+* Re-update fontawesome to 4 series.
+
+
 0.1.8 / 2015.05.02
 ------------------
 
