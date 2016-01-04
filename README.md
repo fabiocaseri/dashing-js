@@ -1,4 +1,4 @@
-# nuvo-dashing-js
+# node-dashing-js
 
 A fork of the port of [Dashing](http://shopify.github.io/dashing/) to node.js in attempt to revive the project with updated dependencies.
 
@@ -10,7 +10,7 @@ A fork of the port of [Dashing](http://shopify.github.io/dashing/) to node.js in
 1. Install from npm
 
 ```shell
-$ npm install -g nuvo-dashing-js
+$ npm install -g node-dashing-js
 ```
 
 2. Generate a new project
