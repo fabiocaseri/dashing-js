@@ -2,7 +2,7 @@
   "name": "dashing-js",
   "description": "Port of Dashing to node.js",
   "author": "Fabio Caseri <fabio.caseri@gmail.com> (http://www.fabiocaseri.com)",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "license": "MIT",
   "dependencies": {
     "async": "^0.2.10",
@@ -21,7 +21,7 @@
     "request": "^2.30.0",
     "unzip": "^0.1.11",
     "walker": "^1.0.7",
-    "winston": "^0.7.3"
+    "winston": "2.2.0"
   },
   "devDependencies": {
     "ejs": "*",
@@ -42,5 +42,5 @@
   "scripts": {
     "test": "make test"
   },
-  "engine": "node >= 0.10"
+  "engine": "node >= 3.10.10"
 }
