@@ -9,9 +9,9 @@
     "coffee-script": "^1.6.3",
     "commander": "^2.1.0",
     "consolidate": "^0.10.0",
-    "ejs": "^0.8.8",
+    "ejs": "2.4.2",
     "express": "^3.4.8",
-    "express-ejs-layouts": "^0.3.1",
+    "express-ejs-layouts": "2.1.0",
     "fs-extra": "^0.8.1",
     "mincer": "1.4.1",
     "node-sass": "^4.5.0",
@@ -22,12 +22,6 @@
     "unzip": "^0.1.11",
     "walker": "^1.0.7",
     "winston": "2.2.0"
-  },
-  "devDependencies": {
-    "ejs": "*",
-    "jade": "*",
-    "mocha": "*",
-    "should": "*"
   },
   "keywords": [
     "dashing",
