@@ -33,19 +33,21 @@ describe('Mincer', function() {
   });
 
   /* Mincer 0.5.x */
-  /*
+
   it('should compile "application.js" without errors', function(done) {
     if (mincer.environment.findAsset('application.js')) {
+
       done();
     }
   });
   
 
   it('should compile "application.css" without errors', function(done) {
+    console.log(mincer.environment.findAsset('application.css'));
     if (mincer.environment.findAsset('application.css')) {
       done();
     }
   });
-  */
+
 
 });
