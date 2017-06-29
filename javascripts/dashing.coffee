@@ -26,13 +26,16 @@ Batman.Filters.shortenedNumber = (num) ->
     num
 
 class window.Dashing extends Batman.App
+  @on 'reload', (data) ->
+    window.location.reload(true)
+
   @root ->
 Dashing.params = Batman.URI.paramsFromQuery(window.location.search.slice(1));
 
 class Dashing.Widget extends Batman.View
   constructor:  ->
     # Set the view path
-    @constructor::source = Batman.Filters.underscore(@constructor.getName())
+    @constructor::source = Batman.Filters.underscore(@constructor.name)
     super
 
     @mixin($(@node).data())
@@ -42,10 +45,6 @@ class Dashing.Widget extends Batman.View
 
     type = Batman.Filters.dashize(@view)
     $(@node).addClass("widget widget-#{type} #{@id}")
-
-  @getName: ->
-    # We would prefer using @constructor.name here but it's nonstandard and doesn't work on IE
-    this.toString().match(/^function\s(.+)\(/)[1]
 
   @accessor 'updatedAtMessage', ->
     if updatedAt = @get('updatedAt')
@@ -96,23 +95,32 @@ Dashing.debugMode = false
 
 source = new EventSource('events')
 source.addEventListener 'open', (e) ->
-  console.log("Connection opened")
+  console.log("Connection opened", e)
 
 source.addEventListener 'error', (e)->
-  console.log("Connection error")
-  if (e.readyState == EventSource.CLOSED)
+  console.log("Connection error", e)
+  if (e.currentTarget.readyState == EventSource.CLOSED)
     console.log("Connection closed")
+    setTimeout (->
+      window.location.reload()
+    ), 5*60*1000
 
-source.addEventListener 'message', (e) =>
+source.addEventListener 'message', (e) ->
   data = JSON.parse(e.data)
   if lastEvents[data.id]?.updatedAt != data.updatedAt
     if Dashing.debugMode
       console.log("Received data for #{data.id}", data)
-    lastEvents[data.id] = data
     if widgets[data.id]?.length > 0
+      lastEvents[data.id] = data
       for widget in widgets[data.id]
         widget.receiveData(data)
 
+source.addEventListener 'dashboards', (e) ->
+  data = JSON.parse(e.data)
+  if Dashing.debugMode
+    console.log("Received data for dashboards", data)
+  if data.dashboard is '*' or window.location.pathname is "/#{data.dashboard}"
+    Dashing.fire data.event, data
 
 $(document).ready ->
   Dashing.run()

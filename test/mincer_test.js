@@ -19,6 +19,7 @@ describe('Mincer', function() {
     done();
   });
 
+/*
   it('should compile "application.js" without errors', function(done) {
     mincer.environment.findAsset('application.js').compile(function(err, asset) {
       done();
@@ -31,21 +32,21 @@ describe('Mincer', function() {
       done();
     });
   });
+*/
 
   /* Mincer 0.5.x */
-  /*
+  
   it('should compile "application.js" without errors', function(done) {
-    if (mincer.environment.findAsset('application.js')) {
+    if (mincer.environment.findAsset('application.coffee')) {
       done();
     }
   });
   
 
   it('should compile "application.css" without errors', function(done) {
-    if (mincer.environment.findAsset('application.css')) {
+    if (mincer.environment.findAsset('application.scss')) {
       done();
     }
   });
-  */
 
 });
