@@ -10,23 +10,23 @@
     "commander": "~2.1.0",
     "consolidate": "~0.10.0",
     "ejs": "~0.8.3",
-    "express": "~3.4.6",
+    "express": "^4.16.4",
     "express-ejs-layouts": "~0.3.1",
     "fs-extra": "~0.8.1",
     "jade": "~0.35.0",
-    "mincer": "~0.5.12",
-    "node-sass": "~0.7.0",
+    "mincer": "^1.5.1",
+    "node-sass": "~4.11.0",
     "node-schedule": "~0.1.8",
     "prompt": "~0.2.11",
-    "request": "~2.30.0",
+    "request": "^2.88.0",
     "unzip": "~0.1.7",
     "walker": "~1.0.3",
-    "winston": "~0.7.1"
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "ejs": "*",
     "jade": "*",
-    "mocha": "*",
+    "mocha": "^5.2.0",
     "should": "*"
   },
   "keywords": [
