@@ -21,7 +21,7 @@
     "request": "^2.88.0",
     "unzip": "~0.1.7",
     "walker": "~1.0.3",
-    "winston": "^3.1.0"
+    "winston": "^2.4.0"
   },
   "devDependencies": {
     "ejs": "*",
